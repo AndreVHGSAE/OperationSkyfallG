@@ -16,6 +16,7 @@ public class PlayerScript : MonoBehaviour
     public float maxTimeS;
     private float originalMaxTimeS;
 
+    public bool BigActivated;
 
 	public float currentTimeB=0;
     public float maxTimeB=1;
@@ -30,6 +31,7 @@ public class PlayerScript : MonoBehaviour
 
     UpdateUI uiScript;
     Coroutine revertOriginalFireRateRoutine;
+    Coroutine revertOriginalShotsRoutine;
 
     public int lifes=3;
     bool isDamage = false;
@@ -84,13 +86,27 @@ public class PlayerScript : MonoBehaviour
         currentTimeS += Time.deltaTime;
         if (currentTimeS >= maxTimeS)
         {
-            GameObject temp = GetBullet();
-            temp.SetActive(true);
-            temp.transform.position = transform.position;
-            //GameObject temp = Instantiate(bullet, transform.position, transform.rotation);
-            Rigidbody2D rbtemp = temp.GetComponent<Rigidbody2D>();
-            rbtemp.AddForce(transform.up * 50, ForceMode2D.Impulse);
-            currentTimeS = 0;
+            if (BigActivated == false)
+            {
+                GameObject temp = GetBullet();
+                temp.SetActive(true);
+                temp.transform.position = transform.position;
+                //GameObject temp = Instantiate(bullet, transform.position, transform.rotation);
+                Rigidbody2D rbtemp = temp.GetComponent<Rigidbody2D>();
+                rbtemp.AddForce(transform.up * 50, ForceMode2D.Impulse);
+                currentTimeS = 0;
+            }
+            else
+            {
+                GameObject temp = GetBigBullet();
+                temp.SetActive(true);
+                temp.transform.position = transform.position;
+                //GameObject temp = Instantiate(bullet, transform.position, transform.rotation);
+                Rigidbody2D rbtemp = temp.GetComponent<Rigidbody2D>();
+                rbtemp.AddForce(transform.up * 10, ForceMode2D.Impulse);
+                currentTimeS = 0;
+            }
+
         }
 
         if (lifes <= 0)
@@ -196,5 +212,23 @@ public class PlayerScript : MonoBehaviour
     {
         yield return new WaitForSeconds(duration);
         maxTimeS = originalMaxTimeS;
+    }
+
+    public void BigShots(bool BigActivated, float duration)
+    {
+        BigActivated = true;
+        
+        if (revertOriginalShotsRoutine != null)
+        {
+            StopCoroutine(revertOriginalShotsRoutine);
+        }
+
+        revertOriginalShotsRoutine = StartCoroutine(RevertOriginalShots(duration));
+    }
+
+    IEnumerator RevertOriginalShots(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        BigActivated = false;
     }
 }

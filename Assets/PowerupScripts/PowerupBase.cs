@@ -27,6 +27,6 @@ public class PowerupBase : MonoBehaviour
 	//Virtual permite poder sobreescribir la lógica función
 	protected virtual void PowerupEffect(GameObject playerGameObject)
 	{
-		Debug.Log("Waza");
+		Debug.Log("This is not overwritten");
 	}
 }
