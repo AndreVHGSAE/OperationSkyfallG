@@ -1,0 +1,27 @@
+using UnityEngine;
+
+public class BulletScript : MonoBehaviour
+{
+    float currentTime;
+    public float maxTime;
+
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (this.gameObject.activeInHierarchy)
+        {
+            currentTime += Time.deltaTime;
+            if (currentTime > maxTime)
+            {
+                gameObject.SetActive(false);
+                currentTime = 0;
+            }
+        }
+    }
+}
