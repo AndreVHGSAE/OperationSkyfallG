@@ -86,7 +86,7 @@ public class BasicEnemyScript : MonoBehaviour
             {
                 uiScript.AddScore(2);
                 int RandomDrop = Random.Range(1, 101);
-                if (RandomDrop <= 50)
+                if (RandomDrop <= 10)
                 {
                     int RandomPowerup = Random.Range(1, 4);
                     if (RandomPowerup == 1)
