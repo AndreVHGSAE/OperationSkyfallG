@@ -50,8 +50,8 @@ public class EnemySpawner : MonoBehaviour
         EnemyList.Add(newEnemy2);
         EnemyList.Add(newEnemy3);
         return newEnemy1;
-        return newEnemy2;
-        return newEnemy3;
+        /*return newEnemy2;
+        return newEnemy3;*/
     }
 }
 

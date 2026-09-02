@@ -16,7 +16,8 @@ public class PlayerScript : MonoBehaviour
     public float maxTimeS;
     private float originalMaxTimeS;
 
-    public bool BigActivated;
+    private bool BigActivated;
+    private bool test;
 
 	public float currentTimeB=0;
     public float maxTimeB=1;
@@ -66,28 +67,21 @@ public class PlayerScript : MonoBehaviour
         uiScript.AddLifes(lifes);
 
         gameTime = 500;
-        for (int i = 0; i < 10; i++)
-        {
-            GameObject temp = Instantiate(bullet, transform.position, transform.rotation);
-            temp.SetActive(false);
-            bulletPool.Add(temp);
-        }
-        for (int i = 0; i < 2; i++)
-        {
-            GameObject temp = Instantiate(bigBullet, transform.position, transform.rotation);
-            temp.SetActive(false);
-            bigBulletPool.Add(temp);
-        }
-    }
+        SetBulletPool(bullet, transform.position, bulletPool);
+		SetBulletPool(bigBullet, transform.position, bigBulletPool);
+	}
 
-    // Update is called once per frame
-    void Update()
+	// Update is called once per frame
+	void Update()
     {
+        Debug.Log($"<color=cyan>BigActivated is {BigActivated}</color>");
+
         currentTimeS += Time.deltaTime;
         if (currentTimeS >= maxTimeS)
         {
             if (BigActivated == false)
             {
+				Debug.Log("UsingNormalBullet");
                 GameObject temp = GetBullet();
                 temp.SetActive(true);
                 temp.transform.position = transform.position;
@@ -98,7 +92,8 @@ public class PlayerScript : MonoBehaviour
             }
             else
             {
-                GameObject temp = GetBigBullet();
+                Debug.Log("UsingBigBullet");
+				GameObject temp = GetBigBullet();
                 temp.SetActive(true);
                 temp.transform.position = transform.position;
                 //GameObject temp = Instantiate(bullet, transform.position, transform.rotation);
@@ -150,7 +145,9 @@ public class PlayerScript : MonoBehaviour
 
     GameObject GetBullet()
     {
-        foreach (GameObject b in bulletPool)
+		Debug.Log("GettingNormalBullet");
+
+		foreach (GameObject b in bulletPool)
         {
             if (b.activeInHierarchy == false)
             {
@@ -207,18 +204,28 @@ public class PlayerScript : MonoBehaviour
 		revertOriginalFireRateRoutine = StartCoroutine(RevertTOriginalFireRate(duration));
 	}
 
+    private void SetBulletPool(GameObject bulletPrefab, Vector3 startPosition, List<GameObject> _bulletPool)
+    {
+		for (int i = 0; i < 10; i++)
+		{
+			GameObject temp = Instantiate(bulletPrefab, startPosition, transform.rotation);
+			temp.SetActive(false);
+			_bulletPool.Add(temp);
+		}
+	}
 
 	IEnumerator RevertTOriginalFireRate(float duration)
     {
         yield return new WaitForSeconds(duration);
         maxTimeS = originalMaxTimeS;
     }
-
-    public void BigShots(bool BigActivated, float duration)
+    //Renombarar variables = (Hold)Crtl + r + r 
+    public void BigShots(bool _BigActivated, float duration)
     {
-        BigActivated = true;
-        
-        if (revertOriginalShotsRoutine != null)
+		BigActivated = _BigActivated;
+
+
+		if (revertOriginalShotsRoutine != null)
         {
             StopCoroutine(revertOriginalShotsRoutine);
         }

@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class BackgroundScroll : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public float targetPosition;
+    public float snapValue;
     void Start()
     {
         
@@ -12,9 +13,9 @@ public class BackgroundScroll : MonoBehaviour
     void Update()
     {
         transform.localPosition += new Vector3(0, -1f * Time.deltaTime, 0);
-        if(transform.position.y <= -12)
+        if(transform.position.y <= -targetPosition)
         {
-            transform.localPosition += new Vector3(0, 24, 0);
+            transform.localPosition += new Vector3(0, snapValue*2, 0);
         }
     }
 }
