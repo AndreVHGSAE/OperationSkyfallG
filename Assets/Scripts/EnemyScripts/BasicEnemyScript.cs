@@ -19,6 +19,9 @@ public class BasicEnemyScript : MonoBehaviour
     public GameObject RDrop2;
     public GameObject RDrop3;
 
+    [SerializeField]
+    private AudioSource DeadExplosion;
+
 
     private void OnEnable()
     {
@@ -96,6 +99,7 @@ public class BasicEnemyScript : MonoBehaviour
                     if (RandomPowerup == 3)
                     Instantiate(RDrop3, this.transform.position, Quaternion.identity);
                 }
+                DeadExplosion.Play();
                 gameObject.SetActive(false);
             }
         }

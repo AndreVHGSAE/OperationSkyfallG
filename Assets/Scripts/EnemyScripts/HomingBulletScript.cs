@@ -7,6 +7,10 @@ public class HomingBulletScript : MonoBehaviour
 
     float currentTime;
     public float maxTime;
+
+    [SerializeField]
+    private AudioSource Destroyed;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -27,6 +31,7 @@ public class HomingBulletScript : MonoBehaviour
             currentTime += Time.deltaTime;
             if (currentTime > maxTime)
             {
+                Destroyed.Play();
                 gameObject.SetActive(false);
                 currentTime = 0;
             }

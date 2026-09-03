@@ -1,30 +1,33 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HomingEnemyScript : MonoBehaviour
+public class BigEnemyScript : MonoBehaviour
 {
     public Rigidbody2D rb2D;
     UpdateUI uiScript;
 
     public GameObject bullet;
     public List<GameObject> bulletPool = new List<GameObject>();
-
+    
     public float currentTimeS;
     public float maxTimeS;
 
     [SerializeField]
-    private int HP = 3;
+    private int HP=10;
 
     public GameObject RDrop1;
     public GameObject RDrop2;
     public GameObject RDrop3;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    [SerializeField]
+    private AudioSource DeadExplosion;
 
     private void OnEnable()
     {
-        maxTimeS = Random.Range(2f, 6f);
+        maxTimeS = Random.Range(1f, 4f);
     }
+
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         uiScript = GameObject.Find("Canvas").GetComponent<UpdateUI>();
@@ -47,8 +50,8 @@ public class HomingEnemyScript : MonoBehaviour
             temp.transform.position = transform.position;
             //GameObject temp = Instantiate(bullet, transform.position, transform.rotation);
             Rigidbody2D rbtemp = temp.GetComponent<Rigidbody2D>();
-            rbtemp.AddForce(transform.up * -1, ForceMode2D.Impulse);
-            maxTimeS = Random.Range(2f, 6f);
+            rbtemp.AddForce(transform.up * -20, ForceMode2D.Impulse);
+            maxTimeS = Random.Range(1f, 4f);
             currentTimeS = 0;
         }
     }
@@ -79,13 +82,14 @@ public class HomingEnemyScript : MonoBehaviour
             }
             if (collision.tag == "BigBullet")
             {
-                HP -= 6;
+                collision.gameObject.SetActive(false);
+                HP -= 10;
             }
             if (HP <= 0)
             {
                 uiScript.AddScore(2);
                 int RandomDrop = Random.Range(1, 101);
-                if (RandomDrop <= 10)
+                if (RandomDrop <= 50)
                 {
                     int RandomPowerup = Random.Range(1, 3);
                     if (RandomPowerup == 1)
@@ -95,6 +99,7 @@ public class HomingEnemyScript : MonoBehaviour
                     if (RandomPowerup == 3)
                         Instantiate(RDrop3, this.transform.position, Quaternion.identity);
                 }
+                DeadExplosion.Play();
                 gameObject.SetActive(false);
             }
         }

@@ -2,8 +2,11 @@ using UnityEngine;
 
 public class PowerupBase : MonoBehaviour
 {
-	//protected solo lo pueden ver el padre u sus hijos
-	protected void Update()
+    [SerializeField]
+    private AudioSource Pickup;
+
+    //protected solo lo pueden ver el padre u sus hijos
+    protected void Update()
 	{
 		transform.localPosition += new Vector3(0, -1 * Time.deltaTime, 0);
         if (transform.position.y <= -7)
@@ -19,6 +22,7 @@ public class PowerupBase : MonoBehaviour
 			//crear un gameObject, su valor es el gameobject de "other" el cual es el collider con el tag de Player;
 			GameObject playerGameObject = other.gameObject;
 			PowerupEffect(playerGameObject);
+			Pickup.Play();
 			Destroy(this.gameObject);
 		}
 	}

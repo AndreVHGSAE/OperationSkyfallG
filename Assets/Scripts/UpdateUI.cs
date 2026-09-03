@@ -8,6 +8,7 @@ public class UpdateUI : MonoBehaviour
     public TMP_Text scoreText;
     public TMP_Text lifesText;
     public TMP_Text TimeText;
+    public TMP_Text HighScoreText;
     public int score;
     GameObject Timer;
     public GameObject gameOverPanel;
@@ -27,14 +28,18 @@ public class UpdateUI : MonoBehaviour
     {
         score += value;
         scoreText.text = "Points: " + score.ToString();
+
     }
 
     public void AddTime(float value)
     {
-
         int seg = (int)value;
-        TimeText.text = "Time: " + seg.ToString("00");
-        
+        TimeText.text = "Time: " + seg.ToString("00"); 
+    }
+
+    public void HighScore()
+    {
+        HighScoreText.text = "High Score: " + PlayerPrefs.GetFloat("HighScore");
     }
 
     public void OpenGameOver()
@@ -46,6 +51,11 @@ public class UpdateUI : MonoBehaviour
         SceneManager.LoadScene(0);
     }
 
+    public void GoToTitleScreen()
+    {
+        SceneManager.LoadScene(1);
+    }
+
     public void QuitGame()
     {
         Application.Quit();
@@ -53,6 +63,11 @@ public class UpdateUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        //PlayerPrefs.SetFloat("HighScore", score);
+        if (PlayerPrefs.GetFloat("HighScore") < score) 
+        {
+            PlayerPrefs.SetFloat("HighScore", score);
+        }
+        HighScore();
     }
 }

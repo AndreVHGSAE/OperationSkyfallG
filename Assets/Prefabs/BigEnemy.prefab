@@ -116,6 +116,7 @@ MonoBehaviour:
   RDrop1: {fileID: 6074679803438795362, guid: 40f630e4dcbb3234eb1c292282e02748, type: 3}
   RDrop2: {fileID: 8776444404546532057, guid: 52ea1110d9031624797b0739b3620aee, type: 3}
   RDrop3: {fileID: 3937209837121243134, guid: 0aeb4010dbc954946aff0aadac2548e9, type: 3}
+  DeadExplosion: {fileID: 8161333687925931501}
 --- !u!61 &4798827327222508074
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -201,7 +202,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0

@@ -17,10 +17,12 @@ public class PlayerScript : MonoBehaviour
     private float originalMaxTimeS;
 
     private bool BigActivated;
-    private bool test;
 
 	public float currentTimeB=0;
     public float maxTimeB=1;
+
+    public float currentTimeI = 0;
+    public float maxTimeI = 1;
 
     public GameObject bullet;
     public List<GameObject> bulletPool = new List<GameObject>();
@@ -36,6 +38,11 @@ public class PlayerScript : MonoBehaviour
 
     public int lifes=3;
     bool isDamage = false;
+
+    [SerializeField]
+    private AudioSource ShootAudio;
+    [SerializeField]
+    private AudioClip NormalShoot, BigCharge, BigShotAudio;
 
     private void OnEnable()
     {
@@ -89,6 +96,8 @@ public class PlayerScript : MonoBehaviour
                 Rigidbody2D rbtemp = temp.GetComponent<Rigidbody2D>();
                 rbtemp.AddForce(transform.up * 50, ForceMode2D.Impulse);
                 currentTimeS = 0;
+                ShootAudio.clip = NormalShoot;
+                ShootAudio.Play();
             }
             else
             {
@@ -100,6 +109,8 @@ public class PlayerScript : MonoBehaviour
                 Rigidbody2D rbtemp = temp.GetComponent<Rigidbody2D>();
                 rbtemp.AddForce(transform.up * 10, ForceMode2D.Impulse);
                 currentTimeS = 0;
+                ShootAudio.clip = BigShotAudio;
+                ShootAudio.Play();
             }
 
         }
@@ -130,6 +141,8 @@ public class PlayerScript : MonoBehaviour
                 //GameObject temp = Instantiate(bullet, transform.position, transform.rotation);
                 Rigidbody2D rbtemp = temp.GetComponent<Rigidbody2D>();
                 rbtemp.AddForce(transform.up * 20, ForceMode2D.Impulse);
+                ShootAudio.clip = BigShotAudio;
+                ShootAudio.Play();
             }
             currentTimeB = 0;
             currentTimeS = 0;
@@ -139,6 +152,19 @@ public class PlayerScript : MonoBehaviour
         if(maxTimeS == 500)
         {
             currentTimeB += Time.deltaTime;
+
+            ShootAudio.clip = BigCharge;
+            ShootAudio.Play();
+        }
+
+        if(isDamage==true)
+        {
+            currentTimeI += Time.deltaTime;
+            if(currentTimeI >= maxTimeI)
+            {
+                currentTimeI = 0;
+                isDamage = false;
+            }
         }
 
     }
@@ -179,10 +205,13 @@ public class PlayerScript : MonoBehaviour
     {
         if (collision.CompareTag("Enemy") || collision.CompareTag("Enemy Bullet"))
         {
-            lifes--;
             collision.gameObject.SetActive(false);
-            uiScript.AddLifes(lifes);
-            isDamage = true;
+            if (isDamage == false)
+            {
+                lifes--;
+                uiScript.AddLifes(lifes);
+                isDamage = true;
+            }
         }
     }
 
