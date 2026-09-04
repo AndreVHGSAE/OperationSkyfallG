@@ -15,7 +15,7 @@ public class BackgroundScroll : MonoBehaviour
         transform.localPosition += new Vector3(0, -1f * Time.deltaTime, 0);
         if(transform.position.y <= -targetPosition)
         {
-            transform.localPosition += new Vector3(0, snapValue*2, 0);
+            transform.localPosition += new Vector3(0, snapValue*3, 0);
         }
     }
 }

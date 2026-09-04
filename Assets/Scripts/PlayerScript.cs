@@ -108,7 +108,7 @@ public class PlayerScript : MonoBehaviour
                 //GameObject temp = Instantiate(bullet, transform.position, transform.rotation);
                 Rigidbody2D rbtemp = temp.GetComponent<Rigidbody2D>();
                 rbtemp.AddForce(transform.up * 10, ForceMode2D.Impulse);
-                currentTimeS = 0;
+                currentTimeS = -0.2f;
                 ShootAudio.clip = BigShotAudio;
                 ShootAudio.Play();
             }
