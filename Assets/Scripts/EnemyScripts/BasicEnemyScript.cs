@@ -100,6 +100,7 @@ public class BasicEnemyScript : MonoBehaviour
                     Instantiate(RDrop3, this.transform.position, Quaternion.identity);
                 }
                 DeadExplosion.Play();
+
                 gameObject.SetActive(false);
             }
         }
