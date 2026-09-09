@@ -36,7 +36,7 @@ public class PlayerScript : MonoBehaviour
     Coroutine revertOriginalFireRateRoutine;
     Coroutine revertOriginalShotsRoutine;
 
-    public int lifes=3;
+    public int lifes=5;
     bool isDamage = false;
 
     [SerializeField]
@@ -47,13 +47,11 @@ public class PlayerScript : MonoBehaviour
     private void OnEnable()
     {
         inputmovement.Enable();
-
     }
 
     private void OnDisable()
     {
         inputmovement.Disable();
-
     }
 
     private void FixedUpdate()
@@ -130,6 +128,8 @@ public class PlayerScript : MonoBehaviour
         if (Mouse.current.leftButton.wasPressedThisFrame)
         {
             maxTimeS = 500;
+            ShootAudio.clip = BigCharge;
+            ShootAudio.Play();
         }
         if (Mouse.current.leftButton.wasReleasedThisFrame)
         {
@@ -152,9 +152,6 @@ public class PlayerScript : MonoBehaviour
         if(maxTimeS == 500)
         {
             currentTimeB += Time.deltaTime;
-
-            ShootAudio.clip = BigCharge;
-            ShootAudio.Play();
         }
 
         if(isDamage==true)

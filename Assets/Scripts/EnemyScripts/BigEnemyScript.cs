@@ -22,6 +22,8 @@ public class BigEnemyScript : MonoBehaviour
     [SerializeField]
     private AudioSource DeadExplosion;
 
+    private SoundManager soundManager;
+
     private void OnEnable()
     {
         maxTimeS = Random.Range(1f, 4f);
@@ -31,6 +33,7 @@ public class BigEnemyScript : MonoBehaviour
     void Start()
     {
         uiScript = GameObject.Find("Canvas").GetComponent<UpdateUI>();
+        soundManager = SoundManager.instance;
     }
 
     // Update is called once per frame
@@ -99,7 +102,8 @@ public class BigEnemyScript : MonoBehaviour
                     if (RandomPowerup == 3)
                         Instantiate(RDrop3, this.transform.position, Quaternion.identity);
                 }
-                DeadExplosion.Play();
+                //DeadExplosion.Play();
+                soundManager.PlaySfx(ESoundTypes.Explosion);
                 gameObject.SetActive(false);
             }
         }

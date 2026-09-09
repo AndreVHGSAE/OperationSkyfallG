@@ -2,6 +2,7 @@ using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 
 public class UpdateUI : MonoBehaviour
 {
@@ -12,6 +13,18 @@ public class UpdateUI : MonoBehaviour
     public int score;
     GameObject Timer;
     public GameObject gameOverPanel;
+    public GameObject pausePanel;
+
+    public InputAction PauseInput;
+
+    private void OnEnable()
+    {
+        PauseInput.Enable();
+    }
+    private void OnDisable()
+    {
+        PauseInput.Disable();
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -61,6 +74,17 @@ public class UpdateUI : MonoBehaviour
         Application.Quit();
     }
     // Update is called once per frame
+    public void OpenPauseMenu()
+    {
+        pausePanel.SetActive(true);
+        Time.timeScale = 0;
+    }
+
+    public void ClosePauseMenu()
+    {
+        pausePanel.SetActive(false);
+        Time.timeScale = 1;
+    }
     void Update()
     {
         //PlayerPrefs.SetFloat("HighScore", score);
@@ -69,5 +93,10 @@ public class UpdateUI : MonoBehaviour
             PlayerPrefs.SetFloat("HighScore", score);
         }
         HighScore();
+
+        //if(PauseInput.wasPressedThisFrame)
+        //{
+        //    OpenPauseMenu();
+        //}
     }
 }

@@ -22,6 +22,8 @@ public class HomingEnemyScript : MonoBehaviour
     [SerializeField]
     private AudioSource DeadExplosion;
 
+    private SoundManager soundManager;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
     private void OnEnable()
@@ -31,6 +33,7 @@ public class HomingEnemyScript : MonoBehaviour
     void Start()
     {
         uiScript = GameObject.Find("Canvas").GetComponent<UpdateUI>();
+        soundManager = SoundManager.instance;
     }
 
     // Update is called once per frame
@@ -98,7 +101,8 @@ public class HomingEnemyScript : MonoBehaviour
                     if (RandomPowerup == 3)
                         Instantiate(RDrop3, this.transform.position, Quaternion.identity);
                 }
-                DeadExplosion.Play();
+                //DeadExplosion.Play();
+                soundManager.PlaySfx(ESoundTypes.Explosion);
                 gameObject.SetActive(false);
             }
         }
