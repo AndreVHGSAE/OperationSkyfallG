@@ -21,6 +21,7 @@ public class BasicEnemyScript : MonoBehaviour
 
     [SerializeField]
     private AudioSource DeadExplosion;
+    private SoundManager soundManager;
 
 
     private void OnEnable()
@@ -32,7 +33,9 @@ public class BasicEnemyScript : MonoBehaviour
     void Start()
     {
         uiScript = GameObject.Find("Canvas").GetComponent<UpdateUI>();
-    }
+        soundManager = SoundManager.instance;
+
+	}
 
     // Update is called once per frame
     void Update()
@@ -99,9 +102,9 @@ public class BasicEnemyScript : MonoBehaviour
                     if (RandomPowerup == 3)
                     Instantiate(RDrop3, this.transform.position, Quaternion.identity);
                 }
-                DeadExplosion.Play();
-
-                gameObject.SetActive(false);
+                //DeadExplosion.Play();
+                soundManager.PlaySfx(ESoundTypes.Explosion);
+				gameObject.SetActive(false);
             }
         }
     }

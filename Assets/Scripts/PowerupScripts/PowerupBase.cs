@@ -5,8 +5,15 @@ public class PowerupBase : MonoBehaviour
     [SerializeField]
     private AudioSource Pickup;
 
-    //protected solo lo pueden ver el padre u sus hijos
-    protected void Update()
+	private SoundManager soundManager;
+
+	protected void Start()
+	{
+		soundManager = SoundManager.instance;
+	}
+
+	//protected solo lo pueden ver el padre u sus hijos
+	protected void Update()
 	{
 		transform.localPosition += new Vector3(0, -1 * Time.deltaTime, 0);
         if (transform.position.y <= -7)
@@ -23,6 +30,9 @@ public class PowerupBase : MonoBehaviour
 			GameObject playerGameObject = other.gameObject;
 			PowerupEffect(playerGameObject);
 			Pickup.Play();
+
+			soundManager.PlaySfx(ESoundTypes.Powerup);
+
 			Destroy(this.gameObject);
 		}
 	}
