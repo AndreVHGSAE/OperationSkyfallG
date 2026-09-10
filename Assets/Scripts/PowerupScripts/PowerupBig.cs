@@ -3,7 +3,7 @@ using UnityEngine;
 public class PowerupBig : PowerupBase
 {
     [SerializeField]
-    private int duration = 5;
+    private int duration = 3;
     private bool BigActivated = true;
 
     protected override void PowerupEffect(GameObject playerGameObject)
