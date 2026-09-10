@@ -36,7 +36,7 @@ public class PlayerScript : MonoBehaviour
     Coroutine revertOriginalFireRateRoutine;
     Coroutine revertOriginalShotsRoutine;
 
-    public int lifes=5;
+    public int lifes=10;
     bool isDamage = false;
 
     [SerializeField]
@@ -65,7 +65,7 @@ public class PlayerScript : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        lifes = 3;
+        lifes = 5;
         originalMaxTimeS = maxTimeS;
 
 		uiScript = GameObject.Find("Canvas").GetComponent<UpdateUI>();

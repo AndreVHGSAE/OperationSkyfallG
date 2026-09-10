@@ -9,7 +9,7 @@ public class PowerupBase : MonoBehaviour
 
 	protected void Start()
 	{
-		soundManager = SoundManager.instance;
+		//soundManager = SoundManager.instance;
 	}
 
 	//protected solo lo pueden ver el padre u sus hijos
@@ -31,7 +31,7 @@ public class PowerupBase : MonoBehaviour
 			PowerupEffect(playerGameObject);
 			Pickup.Play();
 
-			soundManager.PlaySfx(ESoundTypes.Powerup);
+			SoundManager.instance.PlaySfx(ESoundTypes.Powerup);
 
 			Destroy(this.gameObject);
 		}

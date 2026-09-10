@@ -94,9 +94,9 @@ public class UpdateUI : MonoBehaviour
         }
         HighScore();
 
-        //if(PauseInput.wasPressedThisFrame)
-        //{
-        //    OpenPauseMenu();
-        //}
+        if (PauseInput.WasPerformedThisFrame())
+        {
+            OpenPauseMenu();
+        }
     }
 }

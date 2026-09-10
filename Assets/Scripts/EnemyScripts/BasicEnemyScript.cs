@@ -54,7 +54,7 @@ public class BasicEnemyScript : MonoBehaviour
             temp.transform.position = transform.position;
             //GameObject temp = Instantiate(bullet, transform.position, transform.rotation);
             Rigidbody2D rbtemp = temp.GetComponent<Rigidbody2D>();
-            rbtemp.AddForce(transform.up * -20, ForceMode2D.Impulse);
+            rbtemp.AddForce(transform.up * -15, ForceMode2D.Impulse);
             maxTimeS = Random.Range(2f, 6f);
             currentTimeS = 0;
         }
