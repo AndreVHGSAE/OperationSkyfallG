@@ -69,6 +69,11 @@ public class UpdateUI : MonoBehaviour
         SceneManager.LoadScene(0);
     }
 
+    public void GoToWinScreen()
+    {
+        SceneManager.LoadScene(2);
+    }
+
     public void QuitGame()
     {
         Application.Quit();

@@ -12,4 +12,9 @@ public class UITittleScript : MonoBehaviour
     {
         Application.Quit();
     }
+
+    public void GoToTitleScreen()
+    {
+        SceneManager.LoadScene(0);
+    }
 }
