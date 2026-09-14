@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -83,6 +84,8 @@ public class BasicEnemyScript : MonoBehaviour
             {
                 collision.gameObject.SetActive(false);
                 HP--;
+                GetComponent<SpriteRenderer>().DOColor(Color.red, 1).From();
+                GetComponent<SpriteRenderer>().DOColor(Color.white, 1);
             }
             if (collision.tag == "BigBullet")
             {

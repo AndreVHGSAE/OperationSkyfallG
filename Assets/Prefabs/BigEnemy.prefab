@@ -38,7 +38,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &9213718106921010659
 SpriteRenderer:
-  serializedVersion: 2
+  serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -95,6 +95,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+  m_BlendShapeWeights: []
 --- !u!114 &877235127250931224
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -116,6 +117,7 @@ MonoBehaviour:
   RDrop1: {fileID: 6074679803438795362, guid: 40f630e4dcbb3234eb1c292282e02748, type: 3}
   RDrop2: {fileID: 8776444404546532057, guid: 52ea1110d9031624797b0739b3620aee, type: 3}
   RDrop3: {fileID: 3937209837121243134, guid: 0aeb4010dbc954946aff0aadac2548e9, type: 3}
+  BaseColor: {r: 1, g: 0.5529412, b: 0, a: 1}
   DeadExplosion: {fileID: 8161333687925931501}
 --- !u!61 &4798827327222508074
 BoxCollider2D:

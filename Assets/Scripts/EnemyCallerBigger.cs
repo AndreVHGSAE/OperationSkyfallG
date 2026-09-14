@@ -20,7 +20,7 @@ public class EnemyCallerBigger : MonoBehaviour
         {
             for (int i = 0; i < 10; i++)
             {
-                GameObject temp1 = Instantiate(BasicEnemy, new Vector3(Random.Range(-5, 5), Random.Range(6, 9), 0), transform.rotation);
+                GameObject temp1 = Instantiate(BasicEnemy, new Vector3(Random.Range(-4, 5), Random.Range(6, 9), 0), transform.rotation);
                 temp1.SetActive(true);
                 EnemyList.Add(temp1);
             }
@@ -29,7 +29,7 @@ public class EnemyCallerBigger : MonoBehaviour
         {
             for (int i = 0; i < 4; i++)
             {
-                GameObject temp2 = Instantiate(BigEnemy, new Vector3(Random.Range(-5, 5), Random.Range(6, 9), 0), transform.rotation);
+                GameObject temp2 = Instantiate(BigEnemy, new Vector3(Random.Range(-4, 5), Random.Range(6, 9), 0), transform.rotation);
                 temp2.SetActive(true);
                 EnemyList.Add(temp2);
             }
@@ -39,7 +39,7 @@ public class EnemyCallerBigger : MonoBehaviour
         {
             for (int i = 0; i < 10; i++)
             {
-                GameObject temp3 = Instantiate(HomingEnemy, new Vector3(Random.Range(-5, 5), Random.Range(6, 9), 0), transform.rotation);
+                GameObject temp3 = Instantiate(HomingEnemy, new Vector3(Random.Range(-4, 5), Random.Range(6, 9), 0), transform.rotation);
                 temp3.SetActive(true);
                 EnemyList.Add(temp3);
             }

@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -125,13 +126,13 @@ public class PlayerScript : MonoBehaviour
             transform.localPosition += new Vector3(0, -0.5f, 0);
         }
 
-        if (Mouse.current.leftButton.wasPressedThisFrame)
+        if (Mouse.current.leftButton.wasPressedThisFrame && Time.timeScale==1 && revertOriginalFireRateRoutine == null)
         {
-            maxTimeS = 500;
+            maxTimeS = 500;    
             ShootAudio.clip = BigCharge;
             ShootAudio.Play();
         }
-        if (Mouse.current.leftButton.wasReleasedThisFrame)
+        if (Mouse.current.leftButton.wasReleasedThisFrame && Time.timeScale == 1 && revertOriginalFireRateRoutine == null)
         {
             if (currentTimeB >= maxTimeB)
             {
@@ -147,11 +148,13 @@ public class PlayerScript : MonoBehaviour
             currentTimeB = 0;
             currentTimeS = 0;
             maxTimeS = 0.2f;
+            GetComponent<SpriteRenderer>().DOColor(Color.white, 1);
         }
 
         if(maxTimeS == 500)
         {
             currentTimeB += Time.deltaTime;
+            GetComponent<SpriteRenderer>().DOColor(Color.yellow, 1);
         }
 
         if(isDamage==true)
@@ -206,6 +209,8 @@ public class PlayerScript : MonoBehaviour
             if (isDamage == false)
             {
                 lifes--;
+                GetComponent<SpriteRenderer>().DOColor(Color.red, 1).From();
+                GetComponent<SpriteRenderer>().DOColor(Color.white, 1);
                 uiScript.AddLifes(lifes);
                 isDamage = true;
             }
@@ -215,6 +220,8 @@ public class PlayerScript : MonoBehaviour
     public void AddExtraLifes(int value)
     {
         lifes += value;
+        GetComponent<SpriteRenderer>().DOColor(Color.green, 1).From();
+        GetComponent<SpriteRenderer>().DOColor(Color.white, 1);
         uiScript.AddLifes(lifes);
     }
 

@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,6 +19,8 @@ public class BigEnemyScript : MonoBehaviour
     public GameObject RDrop1;
     public GameObject RDrop2;
     public GameObject RDrop3;
+
+    public Color BaseColor;
 
     [SerializeField]
     private AudioSource DeadExplosion;
@@ -82,6 +85,8 @@ public class BigEnemyScript : MonoBehaviour
             {
                 collision.gameObject.SetActive(false);
                 HP--;
+                GetComponent<SpriteRenderer>().DOColor(Color.red, 1).From();
+                GetComponent<SpriteRenderer>().DOColor(BaseColor, 1);
             }
             if (collision.tag == "BigBullet")
             {
