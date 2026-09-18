@@ -126,13 +126,13 @@ public class PlayerScript : MonoBehaviour
             transform.localPosition += new Vector3(0, -0.5f, 0);
         }
 
-        if (Mouse.current.leftButton.wasPressedThisFrame && Time.timeScale==1 && revertOriginalFireRateRoutine == null)
+        if (Mouse.current.leftButton.wasPressedThisFrame && Time.timeScale==1 && maxTimeS != 0.1f)
         {
             maxTimeS = 500;    
             ShootAudio.clip = BigCharge;
             ShootAudio.Play();
         }
-        if (Mouse.current.leftButton.wasReleasedThisFrame && Time.timeScale == 1 && revertOriginalFireRateRoutine == null)
+        if (Mouse.current.leftButton.wasReleasedThisFrame && Time.timeScale == 1 && maxTimeS!=0.1f)
         {
             if (currentTimeB >= maxTimeB)
             {
@@ -148,13 +148,13 @@ public class PlayerScript : MonoBehaviour
             currentTimeB = 0;
             currentTimeS = 0;
             maxTimeS = 0.2f;
-            GetComponent<SpriteRenderer>().DOColor(Color.white, 1);
+            GetComponent<SpriteRenderer>().DOColor(Color.white, 1.5f);
         }
 
         if(maxTimeS == 500)
         {
             currentTimeB += Time.deltaTime;
-            GetComponent<SpriteRenderer>().DOColor(Color.yellow, 1);
+            GetComponent<SpriteRenderer>().DOColor(Color.yellow, 1.5f);
         }
 
         if(isDamage==true)
